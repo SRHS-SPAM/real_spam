@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   
   heroElements.forEach((el, index) => {
-    el.style.opacity = '0';
+    el.style.opacity = '1';
     el.style.animation = `fadeInUp 0.8s ease-out ${index * 0.1}s forwards`;
   });
 });
@@ -148,17 +148,48 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Parallax effect for hero section
+// Unified Hero Section scroll animation - all elements move up and fade out together
 const heroContent = document.querySelector('.hero-content');
 const scrollIndicator = document.querySelector('.scroll-indicator');
+const navbar2 = document.querySelector('.navbar');
+const heroSubtitle = document.querySelector('.hero-subtitle');
+const heroTitle = document.querySelector('.hero-title');
+const heroDesc = document.querySelector('.hero-desc');
 
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
+  const heroHeight = window.innerHeight;
+  const scrollProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
+  
+  // Move all hero elements up together
+  const translateY = scrollY * 0.8;
+  
   if (heroContent) {
-    heroContent.style.transform = `translateY(${scrollY * 0.5}px)`;
+    heroContent.style.transform = `translateY(-${translateY}px)`;
+    heroContent.style.opacity = Math.max(0, 1 - scrollProgress);
   }
+  
+  if (navbar2) {
+    navbar2.style.transform = `translateY(-${translateY}px)`;
+    navbar2.style.opacity = Math.max(0, 1 - scrollProgress);
+  }
+  
   if (scrollIndicator) {
-    scrollIndicator.style.opacity = Math.max(0, 1 - scrollY / 500);
+    scrollIndicator.style.transform = `translateY(-${translateY}px)`;
+    scrollIndicator.style.opacity = Math.max(0, 1 - scrollProgress);
+  }
+  
+  // Ensure all hero text elements fade out together
+  if (heroSubtitle) {
+    heroSubtitle.style.opacity = Math.max(0, 1 - scrollProgress);
+  }
+  
+  if (heroTitle) {
+    heroTitle.style.opacity = Math.max(0, 1 - scrollProgress);
+  }
+  
+  if (heroDesc) {
+    heroDesc.style.opacity = Math.max(0, 1 - scrollProgress);
   }
 });
 
@@ -220,14 +251,30 @@ function animateValue(element, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
-// Scroll to top button functionality
+// Scroll to top button functionality with hiding at bottom
 const scrollToTopButton = document.querySelector('.sticky-cta');
+const ctaSection = document.querySelector('.tech-cta');
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
+  if (!scrollToTopButton || !ctaSection) return;
+  
+  const ctaRect = ctaSection.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+  
+  // CTA 섹션이 뷰포트에 보이기 시작하면 버튼 숨기기
+  if (ctaRect.top < windowHeight) {
+    // CTA 섹션이 화면에 나타났으므로 버튼 숨김
+    scrollToTopButton.style.opacity = '0';
+    scrollToTopButton.style.pointerEvents = 'none';
+    scrollToTopButton.style.transition = 'opacity 0.4s ease-out';
+  } else if (window.scrollY > 300) {
     scrollToTopButton.style.opacity = '1';
     scrollToTopButton.style.pointerEvents = 'auto';
+    scrollToTopButton.style.transition = 'opacity 0.4s ease-out';
   } else {
     scrollToTopButton.style.opacity = '0.7';
+    scrollToTopButton.style.pointerEvents = 'auto';
+    scrollToTopButton.style.transition = 'opacity 0.4s ease-out';
   }
 });
 
