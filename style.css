@@ -62,23 +62,9 @@ a {
   font-weight: 600;
   padding: 12px 22px;
   border-radius: var(--border-radius-btn);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.4s ease-out;
   letter-spacing: 0.02em;
-  /* position: relative; */
   overflow: hidden;
-}
-
-.sticky-cta::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
 }
 
 .sticky-cta:hover {
@@ -86,27 +72,10 @@ a {
   transform: scale(1.05);
 }
 
-.sticky-cta:hover::before {
-  animation: buttonRipple 0.6s ease-out;
-}
-
-@keyframes buttonRipple {
-  to {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
-}
-
 /* ===========================
    Navigation
    =========================== */
 .navbar {
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,14 +98,8 @@ a {
 }
 
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===========================
@@ -163,7 +126,6 @@ a {
   margin-left: 5px;
   letter-spacing: 0.02em;
   animation: fadeInUp 0.8s ease-out 0.1s both;
-
 }
 
 .hero-title {
@@ -175,7 +137,6 @@ a {
   margin-bottom: 20px;
   color: var(--text-primary);
   animation: titleReveal 1s ease-out;
-
 }
 
 .hero-desc {
@@ -185,7 +146,6 @@ a {
   color: var(--text-secondary);
   letter-spacing: 0.01em;
   animation: fadeInUp 0.8s ease-out 0.2s both;
-
 }
 
 .scroll-indicator {
@@ -200,15 +160,10 @@ a {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--text-muted);
+  color: #f0f0f0;
   text-transform: uppercase;
   animation: scrollBounce 2s ease-in-out infinite;
-  color: #f0f0f0;
   margin-bottom: 60px;
-}
-
-.scroll-arrow {
-  font-size: 18px;
 }
 
 @keyframes scrollBounce {
@@ -217,25 +172,27 @@ a {
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes titleReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   Common Animation Classes
+   =========================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ===========================
@@ -244,12 +201,7 @@ a {
 .intro-section {
   padding: var(--section-padding);
   max-width: 1100px;
-  
   margin: 500px auto;
-}
-
-.intro-container {
-  display: block;
 }
 
 .intro-title {
@@ -259,7 +211,6 @@ a {
   color: var(--text-primary);
   margin-bottom: 36px;
   letter-spacing: -0.01em;
-  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .intro-text p {
@@ -268,10 +219,6 @@ a {
   margin-bottom: 20px;
   line-height: 1.8;
   font-weight: 400;
-}
-
-.intro-text p:last-child {
-  margin-bottom: 0;
 }
 
 /* ===========================
@@ -283,10 +230,6 @@ a {
   margin: 0 auto;
 }
 
-.platform-container {
-  max-width: 1200px;
-}
-
 .platform-title {
   font-family: var(--font-korean);
   font-size: clamp(28px, 4vw, 40px);
@@ -294,12 +237,6 @@ a {
   color: var(--text-primary);
   margin-bottom: 36px;
   letter-spacing: -0.01em;
-  animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-  0%, 100% { text-shadow: 0 0 0 rgba(200, 168, 75, 0); }
-  50% { text-shadow: 0 0 20px rgba(200, 168, 75, 0.1); }
 }
 
 .platform-text p {
@@ -308,10 +245,6 @@ a {
   margin-bottom: 20px;
   line-height: 1.8;
   font-weight: 400;
-}
-
-.platform-text p:last-child {
-  margin-bottom: 0;
 }
 
 /* ===========================
@@ -330,7 +263,6 @@ a {
   color: var(--text-primary);
   margin-bottom: 48px;
   letter-spacing: -0.01em;
-  animation: titleGlow 3s ease-in-out infinite;
 }
 
 .projects-grid {
@@ -341,14 +273,8 @@ a {
 
 .project-card {
   cursor: pointer;
-  animation: fadeInUp 0.8s ease-out forwards;
   transition: all 0.3s ease;
 }
-
-.project-card:nth-child(1) { animation-delay: 0s; }
-.project-card:nth-child(2) { animation-delay: 0.1s; }
-.project-card:nth-child(3) { animation-delay: 0.2s; }
-.project-card:nth-child(4) { animation-delay: 0.3s; }
 
 .project-card:hover {
   transform: translateY(-12px);
@@ -359,128 +285,12 @@ a {
   height: 80%;
   border-radius: 20px;
   object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .project-card:hover .project-image {
   transform: scale(1.02);
   box-shadow: 0 20px 40px rgba(204, 173, 81, 0.204);
-}
-
-
-/* Introduce Club Project */
-.project-introduce {
-  background-color: #1a1a1a;
-  border: 1px solid #2a2a2a;
-}
-
-.introduce-mockup {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-.mockup-phone {
-  width: 90%;
-  height: 90%;
-  background: #1e1e1e;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #333;
-}
-
-.mockup-screen {
-  display: flex;
-  height: 100%;
-}
-
-.mockup-sidebar {
-  width: 90px;
-  background: #161616;
-  padding: 10px 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-right: 1px solid #2a2a2a;
-}
-
-.sidebar-item {
-  font-size: 9px;
-  color: rgba(255,255,255,0.4);
-  padding: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.sidebar-item.active {
-  background: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.8);
-}
-
-.mockup-content {
-  flex: 1;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.mockup-header {
-  font-size: 10px;
-  color: rgba(255,255,255,0.7);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.mockup-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-.mockup-card {
-  background: #252525;
-  border-radius: 6px;
-  padding: 6px;
-}
-
-.card-label {
-  font-size: 7px;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 4px;
-}
-
-.card-img {
-  width: 100%;
-  height: 30px;
-  background: #333;
-  border-radius: 3px;
-  margin-bottom: 4px;
-}
-
-.card-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.meta-row {
-  height: 4px;
-  background: #333;
-  border-radius: 2px;
-  width: 70%;
-}
-
-/* PamTion Project */
-.project-pamtion {
-  background-color: #f0f0f0;
-}
-
-.pamtion-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .project-info h3 {
@@ -526,28 +336,6 @@ a {
 .advantage-item {
   display: block;
   max-width: 1200px;
-  animation: slideInLeft 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.advantage-item:nth-child(1) { animation-delay: 0s; }
-.advantage-item:nth-child(2) { animation-delay: 0s; }
-.advantage-item:nth-child(3) { animation-delay: 0s; }
-.advantage-item:nth-child(4) { animation-delay: 0s; }
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.advantage-number {
-  display: none;
 }
 
 .advantage-content h3 {
@@ -565,10 +353,6 @@ a {
   margin-bottom: 14px;
   line-height: 1.8;
   font-weight: 400;
-}
-
-.advantage-content p:last-child {
-  margin-bottom: 0;
 }
 
 /* ===========================
